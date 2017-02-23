@@ -172,9 +172,7 @@ class GetMessageService
         $response = $this->bot->getMessageContent($msgID);
 
         if ($response->isSucceeded()) {
-            $tempfile = tmpfile();
-            fwrite($tempfile, $response->getRawBody());
-            return $response->getRawBody() || json_encode([$response,$msgID]);
+            return $msgID; //$response->getRawBody() || json_encode([$response,$msgID]);
         } else {
             error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
         }
