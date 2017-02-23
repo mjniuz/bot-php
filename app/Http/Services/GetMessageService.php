@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use Carbon\Carbon;
-use App\Imgur\Image;
+use App\Imgur\Images;
 use LINE\LINEBot\MessageBuilder;
 
 class GetMessageService
@@ -22,7 +22,7 @@ class GetMessageService
 
     protected $image;
 
-    public function __construct(Image $image)
+    public function __construct(Images $image)
     {
         $this->image = $image;
     }
