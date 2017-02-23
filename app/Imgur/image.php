@@ -2,7 +2,6 @@
 
 namespace App\Imgur;
 
-
 class Image
 {
     /**
