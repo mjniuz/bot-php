@@ -30,11 +30,13 @@ class GetMessageService
     public function testMeme(){
         $getHeader = 'haha';
         $getFooter = 'wew';
-        $image = 'https://image.freepik.com/free-icon/apple-logo_318-40184.jpg';
+        $image = 'http://www.techinsights.com/uploadedImages/Public_Website/Content_-_Primary/Teardowncom/Sample_Reports/sample-icon.png';
         $base64 = file_get_contents($image);
+        $type = 'jpg';
+        $base64Encode = base64_encode($base64);
 
-        $toMemeURL = $this->image->upload(base64_encode($base64));
-        return $toMemeURL;
+        $toMemeURL = $this->image->upload($base64Encode);
+        return json_encode([$toMemeURL,base64_encode($base64)]);
     }
 
     public function replySend($formData)
