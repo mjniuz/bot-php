@@ -93,7 +93,7 @@ class GetMessageService
     private function collectMsg($msgUser = '',$ev){
         $userID = $this->userID($ev);
 
-        if($msgUser == 'help'){
+        if($msgUser == 'help' || $msgUser == ''){
             Cache::flush();
             return $this->help();
         }
@@ -103,7 +103,7 @@ class GetMessageService
             return $this->meme($ev);
         }
 
-        if(Cache::get($userID.'create_meme') || $msgUser == ''){
+        if(Cache::get($userID.'create_meme') && $msgUser == ''){
             return $this->startMeme($ev);
         }
         // default flush
@@ -112,8 +112,8 @@ class GetMessageService
     }
 
     private function help(){
-        $msg = 'Buat lo yang pengen bikin meme, silahkan ketik:
-                *maen Meme*';
+        $msg = 'Buat lo yang pengen bikin meme, silahkan ketik: 
+        maen Meme';
 
         return $msg;
     }
@@ -123,7 +123,7 @@ class GetMessageService
         $expiresAt = Carbon::now()->addMinutes(2);
         Cache::add($userID.'create_meme', true, $expiresAt);
 
-        $msg = 'Tulis kata untuk menaruh gambar di HEADER, lebih dari 10 Karakter yo!!';
+        $msg = 'Tulis kata untuk menaruh gambar di HEADER';
         return $msg;
     }
 
