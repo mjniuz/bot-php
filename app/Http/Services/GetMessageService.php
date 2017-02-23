@@ -143,7 +143,7 @@ class GetMessageService
 
         if($getHeader && $getFooter){
             // upload image
-            $image = $this->getMedia($ev);
+            $image = 'haha';//$this->getMedia($ev);
             //$imgURL = $this->image->upload($image);
             //$toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
 
