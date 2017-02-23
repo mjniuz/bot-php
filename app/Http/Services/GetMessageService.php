@@ -37,7 +37,7 @@ class GetMessageService
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
 
         $msgResponse = $this->getMsg($ev);
-        if(Cache::get($userID.'meme_ready') && false){
+        /*if(Cache::get($userID.'meme_ready')){
             // image
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
 
@@ -49,11 +49,11 @@ class GetMessageService
             $response = $this->bot->replyText($replyToken, $textMessageBuilder);
             Cache::forget($userID.'meme_ready');
             return true;
-        }
+        }*/
 
         if($dev){
-            echo json_encode($msgResponse);
-            exit;
+            //echo json_encode($msgResponse);
+            //exit;
         }
 
         //Cache::forget($userID.'meme_ready');
@@ -85,12 +85,12 @@ class GetMessageService
         $userID = $this->userID($ev);
 
         if($msgUser == 'help'){
-            Cache::flush();
+            //Cache::flush();
             return $this->help();
         }
 
         if($msgUser == 'maen meme'){
-            Cache::flush();
+            //Cache::flush();
             return $this->meme($ev);
         }
 
@@ -98,7 +98,7 @@ class GetMessageService
             return $this->startMeme($ev);
         }
         // default flush
-        Cache::flush();
+        //Cache::flush();
         return 'Ga jelas lu!';
     }
 
