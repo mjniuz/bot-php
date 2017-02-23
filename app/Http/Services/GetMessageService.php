@@ -142,7 +142,8 @@ class GetMessageService
         if($getHeader && $getFooter){
             // upload image
             $image = $this->getMedia($ev);
-            $toMemeURL = $this->image->meme($image,$getHeader,$getFooter);
+            $imgURL = $this->image->upload($image);
+            $toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
 
             Cache::add($keyReady, true, $expiresAt);
 
@@ -162,22 +163,8 @@ class GetMessageService
 
     private function getMedia($ev = []){
         $msgID = $ev['message']['id'];
-        $url = 'https://api.line.me/v2/bot/message/'.$msgID.'/content';
-        $ch = curl_init();
+        $response = $this->bot->getMessageContent($msgID);
 
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer ' . env('LINE_BOT_ACCESS_TOKEN',''),
-            'Content-Type: application/x-www-form-urlencoded'
-        ));
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $server_output = curl_exec ($ch);
-
-        curl_close ($ch);
-
-        return $url;
+        return $response->getRawBody();
     }
 }
