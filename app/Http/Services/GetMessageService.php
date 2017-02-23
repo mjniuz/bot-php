@@ -25,8 +25,6 @@ class GetMessageService
     public function __construct(Images $image)
     {
         $this->image = $image;
-        $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
-        $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
     }
 
     public function testMeme(){
@@ -43,6 +41,8 @@ class GetMessageService
         $ev = $formData['events']['0'];
         $userID = $this->userID($ev);
         $replyToken = $ev['replyToken'];
+        $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
+        $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
 
         $msgResponse = $this->getMsg($ev);
         if(Cache::get($userID.'meme_ready')){
@@ -164,6 +164,8 @@ class GetMessageService
     }
 
     private function getMedia($ev = []){
+        $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
+        $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
         $msgID = $ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
 
