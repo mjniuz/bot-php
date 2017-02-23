@@ -67,6 +67,10 @@ class GetMessageService
             return $this->collectMsg($msgUser,$ev);
         }
 
+        if($msgType == 'image'){
+            return $this->collectMsg('',$ev);
+        }
+
         return 'no msg';
     }
 
@@ -83,7 +87,7 @@ class GetMessageService
             return $this->meme($ev);
         }
 
-        if(Cache::get($userID.'create_meme')){
+        if(Cache::get($userID.'create_meme') || $msgUser == ''){
             return $this->startMeme($ev);
         }
         // default flush
