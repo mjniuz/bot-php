@@ -103,7 +103,7 @@ class GetMessageService
             return $this->meme($ev);
         }
 
-        if(Cache::get($userID.'create_meme') && $msgUser == ''){
+        if(Cache::get($userID.'create_meme')){
             return $this->startMeme($ev);
         }
         // default flush
