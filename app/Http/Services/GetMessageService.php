@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use Illuminate\Support\Facades\Cache;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 
@@ -45,7 +46,7 @@ class GetMessageService
         return 'no msg';
     }
 
-    private function collectMsg($msgUser = ''){
+    private function collectMsg($msgUser = '',$ev){
         switch ($msgUser){
             case 'help':
                 $response = $this->help();
@@ -53,8 +54,11 @@ class GetMessageService
             case 'maen meme':
                 $response = $this->meme();
                 break;
+            case strlen($msgUser) > 10:
+                $response = $this->startMeme();
+                break;
             default:
-                $response = $this->help();
+                $response = 'Ga jelas lu!';
         }
 
         return $response;
@@ -67,8 +71,34 @@ class GetMessageService
         return $msg;
     }
 
-    private function meme(){
-        $msg = 'Tulis kata untuk menaruh gambar diatas';
+    private function meme($isHeader = true){
+        $msg = 'Tulis kata untuk menaruh gambar di HEADER, lebih dari 10 Karakter yo!! ';
         return $msg;
+    }
+
+    private function startMeme($ev = []) {
+        $userID = $this->userID($ev);
+        $keyHeader = $userID.'meme_header';
+        $keyFooter = $userID.'meme_footer';
+        $getHeader = Cache::get($keyHeader);
+        if(!$getHeader){
+            Cache::add($keyHeader, $this->getMsg($ev), 2 /*minutes*/);
+            return 'Tulis kata untuk menaruh gambar di FOOTER';
+        }
+
+        if($getHeader){
+            Cache::add($keyFooter, $this->getMsg($ev), 2 /*minutes*/);
+            return 'Sekarang coba upload gambar lo, lebih dari 10 Karakter yo!!';
+        }
+        return true;
+    }
+
+    private function userID($ev = []){
+        $userType = !empty($ev['source']) ? $ev['source']['type'] : false;
+        if($userType == 'user'){
+            return $ev['source']['userId'];
+        }
+
+        return false;
     }
 }
