@@ -168,13 +168,13 @@ class GetMessageService
     private function getMedia($ev = []){
         $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
-        $msgID = $ev['message']['id'];
+        $msgID = (int)$ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
 
         if ($response->isSucceeded()) {
             $tempfile = tmpfile();
             fwrite($tempfile, $response->getRawBody());
-            return $response; //$response->getRawBody() || json_encode([$response,$msgID]);
+            return $response->getRawBody() || json_encode([$response,$msgID]);
         } else {
             error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
         }
