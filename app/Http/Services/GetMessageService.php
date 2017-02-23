@@ -62,7 +62,7 @@ class GetMessageService
         }
 
         Cache::forget($userID.'meme_ready');
-        $response = $this->bot->replyText($replyToken,  $msgResponse . json_encode($ev));
+        $response = $this->bot->replyText($replyToken,  $msgResponse);
         
         if ($response->isSucceeded()) {
             logger("reply success!!");
