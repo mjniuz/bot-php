@@ -181,7 +181,7 @@ class GetMessageService
         $url = 'https://api.line.me/v2/bot/message/'.$msgID.'/content';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Authorization: Bearer ' . env('LINE_BOT_ACCESS_TOKEN')
         ));
