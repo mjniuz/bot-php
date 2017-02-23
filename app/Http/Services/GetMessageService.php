@@ -46,7 +46,7 @@ class GetMessageService
         return 'no msg';
     }
 
-    private function collectMsg($msgUser = '',$ev){
+    private function collectMsg($msgUser = ''){
         if($msgUser == 'help'){
             return $this->help();
         }
