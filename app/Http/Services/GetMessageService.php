@@ -150,11 +150,11 @@ class GetMessageService
             // upload image
             $image = $this->getMedia($ev);
             $imgURL = $this->image->upload($image);
-            //$toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
+            $toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
 
             Cache::add($keyReady, true, $expiresAt);
 
-            return $imgURL; //$toMemeURL;
+            return $toMemeURL; //$toMemeURL;
         }
         return true;
     }
