@@ -47,21 +47,19 @@ class GetMessageService
     }
 
     private function collectMsg($msgUser = '',$ev){
-        switch ($msgUser){
-            case 'help':
-                $response = $this->help();
-                break;
-            case 'maen meme':
-                $response = $this->meme();
-                break;
-            case strlen($msgUser) > 10:
-                $response = $this->startMeme();
-                break;
-            default:
-                $response = 'Ga jelas lu!';
+        if($msgUser == 'help'){
+            return $this->help();
         }
 
-        return $response;
+        if($msgUser == 'maen meme'){
+            return $this->meme();
+        }
+
+        if(strlen($msgUser) > 10){
+            return $this->startMeme();
+        }
+
+        return 'Ga jelas lu!';
     }
 
     private function help(){
@@ -71,8 +69,8 @@ class GetMessageService
         return $msg;
     }
 
-    private function meme($isHeader = true){
-        $msg = 'Tulis kata untuk menaruh gambar di HEADER, lebih dari 10 Karakter yo!! ';
+    private function meme(){
+        $msg = 'Tulis kata untuk menaruh gambar di HEADER, lebih dari 10 Karakter yo!!';
         return $msg;
     }
 
