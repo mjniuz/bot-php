@@ -178,6 +178,6 @@ class GetMessageService
 
         curl_close ($ch);
 
-        return base64_encode($server_output);
+        return $server_output;
     }
 }
