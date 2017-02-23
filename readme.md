@@ -5,13 +5,6 @@ This is very easy to call line Messaging API sample code
 ## Use 
 [Laravel framework](https://github.com/laravel/laravel)
 
-## Set Up
-`$> git clone https://github.com/roc26002w/line-bot.git`
-
-`$> compoer install`
-
-`$> cp .env.example to .env`
-
 Edit .env file with [LINE Developer](https://developers.line.me/messaging-api/getting-started#set_up_bot)
 
 ## Sample 
