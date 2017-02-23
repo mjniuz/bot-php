@@ -46,7 +46,7 @@ class GetMessageService
                 exit;
             }
 
-            $response = $this->bot->replyText($replyToken,  $textMessageBuilder);
+            $response = $this->bot->replyText($replyToken, $textMessageBuilder);
             Cache::forget($userID.'meme_ready');
             return true;
         }
@@ -57,7 +57,7 @@ class GetMessageService
             exit;
         }
 
-
+        Cache::forget($userID.'meme_ready');
         $response = $this->bot->replyText($replyToken,  $msgResponse . ' ' . json_encode($ev));
         
         if ($response->isSucceeded()) {
