@@ -93,7 +93,7 @@ class GetMessageService
     private function collectMsg($msgUser = '',$ev){
         $userID = $this->userID($ev);
 
-        if($msgUser == 'help' || $msgUser == ''){
+        if(strtolower($msgUser) == 'help' || $msgUser == ''){
             Cache::flush();
             return $this->help();
         }
