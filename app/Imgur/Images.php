@@ -36,7 +36,7 @@ class Images
         if(!empty($response['success'])){
             return $response['data']['link'];
         }
-        return false;
+        return 'gagal upload imgur';
     }
 
     public function meme($imgURL = '',$headerText = '',$footerText = ''){
