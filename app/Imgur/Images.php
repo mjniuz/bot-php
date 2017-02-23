@@ -34,7 +34,7 @@ class Images
 
 
         if($response->success){
-            return $response->data->link;
+            return str_replace('http','https',$response->data->link);
         }
         return $response;
     }

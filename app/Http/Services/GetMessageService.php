@@ -55,7 +55,7 @@ class GetMessageService
             $response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
 
             if (!$response->isSucceeded()) {
-                $response = $this->bot->replyText($replyToken,  'gagal' . substr($msgResponse,0,10).'...');
+                $response = $this->bot->replyText($replyToken,  $msgResponse);
             }
 
             return true;
