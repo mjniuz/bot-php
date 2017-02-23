@@ -141,8 +141,7 @@ class GetMessageService
         if($getHeader && $getFooter){
             // upload image
             $image = $this->getMedia($ev);
-            $imgURL = $this->image->upload($image);
-            $toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
+            $toMemeURL = $this->image->meme($image,$getHeader,$getFooter);
 
             Cache::add($keyReady, true, $expiresAt);
 
