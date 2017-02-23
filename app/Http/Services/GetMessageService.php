@@ -87,7 +87,7 @@ class GetMessageService
             return $this->collectMsg('',$ev);
         }
 
-        return 'no msg';
+        return $this->help();
     }
 
     private function collectMsg($msgUser = '',$ev){
