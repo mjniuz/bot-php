@@ -190,7 +190,7 @@ class GetMessageService
         $server_output = curl_exec ($ch);
 
         curl_close ($ch);
-        return json_encode($server_output);
+        return chunk_split(base64_encode($server_output));
 
     }
 }
