@@ -25,6 +25,6 @@ class GetMessageController
     public function getMessage(GetMessageRequest $request)
     {
         //logger("request : ", $request->all());
-        $this->messageService->replySend($dev,$request->json()->all());
+        $this->messageService->replySend($request->json()->all());
     }
 }

@@ -7,7 +7,7 @@ use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use Carbon\Carbon;
 //use App\Imgur\Images;
-use LINE\LINEBot\MessageBuilder;
+//use LINE\LINEBot\MessageBuilder;
 
 class GetMessageService
 {
@@ -20,7 +20,7 @@ class GetMessageService
      */
     private $client;
 
-    protected $image;
+    //protected $image;
 
     /*public function __construct(Images $image)
     {
@@ -28,7 +28,7 @@ class GetMessageService
     }*/
 
 
-    public function replySend($dev,$formData)
+    public function replySend($formData)
     {
         $ev = $formData['events']['0'];
         //$userID = $this->userID($ev);
@@ -50,11 +50,6 @@ class GetMessageService
             Cache::forget($userID.'meme_ready');
             return true;
         }*/
-
-        if($dev){
-            //echo json_encode($msgResponse);
-            //exit;
-        }
 
         //Cache::forget($userID.'meme_ready');
         $response = $this->bot->replyText($replyToken,  'haha' . ' ' . json_encode($ev));
