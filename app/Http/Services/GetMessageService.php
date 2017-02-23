@@ -178,6 +178,6 @@ class GetMessageService
 
         curl_close ($ch);
 
-        return $server_output;
+        return $url;
     }
 }
