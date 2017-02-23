@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Cache;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use Carbon\Carbon;
-//use App\Imgur\Images;
-//use LINE\LINEBot\MessageBuilder;
+use App\Imgur\Images;
+use LINE\LINEBot\MessageBuilder;
 
 class GetMessageService
 {
@@ -20,38 +20,32 @@ class GetMessageService
      */
     private $client;
 
-    //protected $image;
+    protected $image;
 
-    /*public function __construct(Images $image)
+    public function __construct(Images $image)
     {
         $this->image = $image;
-    }*/
+    }
 
 
     public function replySend($formData)
     {
         $ev = $formData['events']['0'];
-        //$userID = $this->userID($ev);
+        $userID = $this->userID($ev);
         $replyToken = $ev['replyToken'];
         $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
 
-        //$msgResponse = $this->getMsg($ev);
-        /*if(Cache::get($userID.'meme_ready')){
+        $msgResponse = $this->getMsg($ev);
+        if(Cache::get($userID.'meme_ready')){
             // image
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
-
-            if($dev){
-                echo json_encode($textMessageBuilder);
-                exit;
-            }
-
             $response = $this->bot->replyText($replyToken, $textMessageBuilder);
             Cache::forget($userID.'meme_ready');
             return true;
-        }*/
+        }
 
-        //Cache::forget($userID.'meme_ready');
+        Cache::forget($userID.'meme_ready');
         $response = $this->bot->replyText($replyToken,  'haha' . ' ' . json_encode($ev));
         
         if ($response->isSucceeded()) {
