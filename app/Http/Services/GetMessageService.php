@@ -31,7 +31,7 @@ class GetMessageService
     public function replySend($dev,$formData)
     {
         $ev = $formData['events']['0'];
-        $userID = $this->userID($ev);
+        //$userID = $this->userID($ev);
         $replyToken = $ev['replyToken'];
         $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
@@ -137,16 +137,16 @@ class GetMessageService
             return 'Sekarang coba upload gambar lo';
         }
 
-        if($getHeader && $getFooter){
+        /*if($getHeader && $getFooter){
             // upload image
             $image = $this->getMedia($ev);
             $imgURL = $this->image->upload($image);
             $toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
 
-            Cache::add($keyReady, true, $expiresAt /*minutes*/);
+            Cache::add($keyReady, true, $expiresAt);
 
             return $toMemeURL;
-        }
+        }*/
         return true;
     }
 
