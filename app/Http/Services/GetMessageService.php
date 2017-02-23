@@ -50,7 +50,7 @@ class GetMessageService
             // image
             //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
             //$response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
-            $response = $this->bot->replyText($replyToken,  $msgResponse . 'please');
+            $response = $this->bot->replyText($replyToken,  'please');
 
 
             return true;
