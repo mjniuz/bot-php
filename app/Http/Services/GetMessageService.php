@@ -174,7 +174,7 @@ class GetMessageService
         if ($response->isSucceeded()) {
             //$tempfile = tmpfile();
             //fwrite($tempfile, $response->getRawBody());
-            return $response->getRawBody() || json_encode($response);
+            return $response->getRawBody() || json_encode([$response,$msgID]);
         }
         return json_encode($response->getHTTPStatus() . ' ' . $response->getRawBody());
 
