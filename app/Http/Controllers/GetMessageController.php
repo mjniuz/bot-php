@@ -27,4 +27,8 @@ class GetMessageController
         //logger("request : ", $request->all());
         $this->messageService->replySend($request->json()->all());
     }
+    
+    public function test(GetMessageRequest $request){
+        return response()->json($this->messageService->testMeme());
+    }
 }

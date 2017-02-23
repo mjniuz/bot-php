@@ -27,6 +27,15 @@ class GetMessageService
         $this->image = $image;
     }
 
+    public function testMeme(){
+        $getHeader = 'haha';
+        $getFooter = 'wew';
+        $image = 'https://image.freepik.com/free-icon/apple-logo_318-40184.jpg';
+
+        $imgURL = $this->image->upload($image);
+        $toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
+        return $toMemeURL;
+    }
 
     public function replySend($formData)
     {
