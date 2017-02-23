@@ -172,6 +172,6 @@ class GetMessageService
             return $response->getRawBody();
         }
 
-        return false;
+        return $msgID;
     }
 }
