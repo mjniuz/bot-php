@@ -48,7 +48,7 @@ class GetMessageService
         if(Cache::get($userID.'meme_ready')){
             Cache::forget($userID . 'meme_ready');
             // image
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
+            //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
             //$response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
             $response = $this->bot->replyText($replyToken,  $msgResponse);
 
@@ -144,8 +144,8 @@ class GetMessageService
         if($getHeader && $getFooter){
             // upload image
             $image = $this->getMedia($ev);
-            $imgURL = $this->image->upload($image);
-            $toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
+            //$imgURL = $this->image->upload($image);
+            //$toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
 
             Cache::add($keyReady, true, $expiresAt);
 
