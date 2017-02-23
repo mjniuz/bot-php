@@ -36,7 +36,7 @@ class GetMessageService
         $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
 
-        $msgResponse = $this->getMsg($ev);
+        //$msgResponse = $this->getMsg($ev);
         /*if(Cache::get($userID.'meme_ready')){
             // image
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
@@ -57,7 +57,7 @@ class GetMessageService
         }
 
         //Cache::forget($userID.'meme_ready');
-        $response = $this->bot->replyText($replyToken,  $msgResponse . ' ' . json_encode($ev));
+        $response = $this->bot->replyText($replyToken,  'haha' . ' ' . json_encode($ev));
         
         if ($response->isSucceeded()) {
             logger("reply success!!");
