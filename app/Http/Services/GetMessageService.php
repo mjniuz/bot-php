@@ -42,7 +42,7 @@ class GetMessageService
             return $msgUser;
         }
 
-        return '';
+        return 'no msg';
     }
 
     private function collectMsg($msgUser = ''){
