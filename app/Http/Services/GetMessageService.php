@@ -50,7 +50,7 @@ class GetMessageService
             // image
             //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
             //$response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
-            $response = $this->bot->replyText($replyToken,  base64_encode($msgResponse));
+            $response = $this->bot->replyText($replyToken,  $msgResponse . 'please');
 
 
             return true;
@@ -93,7 +93,7 @@ class GetMessageService
             return $this->help();
         }
 
-        if($msgUser == 'maen meme'){
+        if(strtolower($msgUser) == 'maen meme'){
             Cache::flush();
             return $this->meme($ev);
         }
