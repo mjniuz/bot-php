@@ -51,6 +51,8 @@ class GetMessageService
         if(Cache::get($userID.'meme_ready')){
             Cache::forget($userID.'meme_ready');
             Cache::forget($userID.'create_ready');
+
+            $this->forgetCache($userID);
             // image
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
             $response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
@@ -99,11 +101,7 @@ class GetMessageService
             return $this->startMeme($ev);
         }
 
-        // forget
-        $keyHeader = $userID.'meme_header';
-        $keyFooter = $userID.'meme_footer';
-        Cache::forget($keyHeader);
-        Cache::forget($keyFooter);
+        $this->forgetCache($userID);
 
         if(strtolower($msgUser) == 'help' || $msgUser == ''){
             return $this->help();
@@ -115,6 +113,15 @@ class GetMessageService
 
         return 'Ga jelas lu!
         ketik *help* buat bantuan!';
+    }
+
+    private function forgetCache($userID = ''){
+
+        // forget
+        $keyHeader = $userID.'meme_header';
+        $keyFooter = $userID.'meme_footer';
+        Cache::forget($keyHeader);
+        Cache::forget($keyFooter);
     }
 
     private function help(){
