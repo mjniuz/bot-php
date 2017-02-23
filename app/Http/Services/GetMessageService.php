@@ -32,8 +32,7 @@ class GetMessageService
         $getFooter = 'wew';
         $image = 'https://image.freepik.com/free-icon/apple-logo_318-40184.jpg';
 
-        $imgURL = $this->image->upload($image);
-        $toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
+        $toMemeURL = $this->image->meme($image,$getHeader,$getFooter);
         return $toMemeURL;
     }
 
