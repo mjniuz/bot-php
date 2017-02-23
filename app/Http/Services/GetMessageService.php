@@ -49,7 +49,9 @@ class GetMessageService
             Cache::forget($userID . 'meme_ready');
             // image
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
-            $response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
+            //$response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
+            $response = $this->bot->replyText($replyToken,  $msgResponse);
+
 
             return true;
         }
@@ -147,7 +149,7 @@ class GetMessageService
 
             Cache::add($keyReady, true, $expiresAt);
 
-            return $toMemeURL;
+            return $image; //$toMemeURL;
         }
         return true;
     }
