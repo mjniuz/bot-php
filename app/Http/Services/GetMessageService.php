@@ -46,7 +46,7 @@ class GetMessageService
         }
 
         Cache::forget($userID.'meme_ready');
-        $response = $this->bot->replyText($replyToken,  'haha' . ' ' . json_encode($ev));
+        $response = $this->bot->replyText($replyToken,  $msgResponse . json_encode($ev));
         
         if ($response->isSucceeded()) {
             logger("reply success!!");
@@ -74,12 +74,12 @@ class GetMessageService
         $userID = $this->userID($ev);
 
         if($msgUser == 'help'){
-            //Cache::flush();
+            Cache::flush();
             return $this->help();
         }
 
         if($msgUser == 'maen meme'){
-            //Cache::flush();
+            Cache::flush();
             return $this->meme($ev);
         }
 
@@ -87,7 +87,7 @@ class GetMessageService
             return $this->startMeme($ev);
         }
         // default flush
-        //Cache::flush();
+        Cache::flush();
         return 'Ga jelas lu!';
     }
 
@@ -126,7 +126,7 @@ class GetMessageService
             return 'Sekarang coba upload gambar lo';
         }
 
-        /*if($getHeader && $getFooter){
+        if($getHeader && $getFooter){
             // upload image
             $image = $this->getMedia($ev);
             $imgURL = $this->image->upload($image);
@@ -135,7 +135,7 @@ class GetMessageService
             Cache::add($keyReady, true, $expiresAt);
 
             return $toMemeURL;
-        }*/
+        }
         return true;
     }
 
