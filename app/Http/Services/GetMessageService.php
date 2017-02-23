@@ -50,7 +50,7 @@ class GetMessageService
             // image
             //$textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
             //$response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
-            $response = $this->bot->replyText($replyToken,  $msgResponse);
+            $response = $this->bot->replyText($replyToken,  json_encode($msgResponse));
 
 
             return true;
@@ -168,7 +168,10 @@ class GetMessageService
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
         $msgID = $ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
+        if ($response->isSucceeded()) {
+            return $response->getRawBody();
+        }
 
-        return $response->getRawBody();
+        return false;
     }
 }
