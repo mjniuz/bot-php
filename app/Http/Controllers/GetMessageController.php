@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GetMessageRequest;
 use App\Http\Services\GetMessageService;
+use Symfony\Component\HttpFoundation\Request;
 
 class GetMessageController
 {
@@ -21,9 +22,9 @@ class GetMessageController
         $this->messageService = $messageService;
     }
     
-    public function getMessage(GetMessageRequest $request)
+    public function getMessage($dev = false,GetMessageRequest $request)
     {
         //logger("request : ", $request->all());
-        $this->messageService->replySend($request->json()->all());
+        $this->messageService->replySend($dev,$request->json()->all());
     }
 }
