@@ -113,7 +113,8 @@ class GetMessageService
             return $this->meme($ev);
         }
 
-        return 'Ga jelas lu!';
+        return 'Ga jelas lu!
+        ketik *help* buat bantuan!';
     }
 
     private function help(){
