@@ -146,12 +146,12 @@ class GetMessageService
         if($getHeader && $getFooter){
             // upload image
             $image = $this->getMedia($ev);
-            //$imgURL = $this->image->upload($image);
+            $imgURL = $this->image->upload($image);
             //$toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
 
             Cache::add($keyReady, true, $expiresAt);
 
-            return $image; //$toMemeURL;
+            return $imgURL; //$toMemeURL;
         }
         return true;
     }
@@ -172,26 +172,12 @@ class GetMessageService
         $response = $this->bot->getMessageContent($msgID);
 
         if ($response->isSucceeded()) {
-            return substr(base64_encode($response->getRawBody()),0,10) . '...'; //$response->getRawBody() || json_encode([$response,$msgID]);
+            return base64_encode($response->getRawBody()); //$response->getRawBody() || json_encode([$response,$msgID]);
         } else {
             error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
         }
 
-        /*$msgID = $ev['message']['id'];
-
-        $url = 'https://api.line.me/v2/bot/message/'.$msgID.'/content';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Authorization: Bearer ' . env('LINE_BOT_ACCESS_TOKEN')
-        ));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-        $server_output = curl_exec ($ch);
-
-        curl_close ($ch);
-        return chunk_split(base64_encode($server_output));*/
+        return false;
 
     }
 }
