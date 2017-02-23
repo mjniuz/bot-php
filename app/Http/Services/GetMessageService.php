@@ -112,7 +112,8 @@ class GetMessageService
     }
 
     private function help(){
-        $msg = 'Buat lo yang pengen bikin meme, silahkan ketik: 
+        $msg = 'Buatanye Alan.
+        Buat lo yang pengen bikin meme, silahkan ketik: 
         maen Meme';
 
         return $msg;
