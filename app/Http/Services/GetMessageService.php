@@ -37,7 +37,7 @@ class GetMessageService
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
 
         $msgResponse = $this->getMsg($ev);
-        if(Cache::get($userID.'meme_ready')){
+        if(Cache::get($userID.'meme_ready') && false){
             // image
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
 
