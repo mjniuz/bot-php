@@ -172,7 +172,7 @@ class GetMessageService
         $response = $this->bot->getMessageContent($msgID);
 
         if ($response->isSucceeded()) {
-            return base64_encode($response->getRawBody()); //$response->getRawBody() || json_encode([$response,$msgID]);
+            return substr(base64_encode($response->getRawBody()),0,10) . '...'; //$response->getRawBody() || json_encode([$response,$msgID]);
         } else {
             error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
         }
