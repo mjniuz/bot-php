@@ -40,13 +40,13 @@ class GetMessageService
         if($msgType == 'text'){
             $msgUser = $ev['message']['text'];
 
-            return $this->collectMsg($msgUser);
+            return $this->collectMsg($msgUser,$ev);
         }
 
         return 'no msg';
     }
 
-    private function collectMsg($msgUser = ''){
+    private function collectMsg($msgUser = '',$ev){
         if($msgUser == 'help'){
             return $this->help();
         }
@@ -56,7 +56,7 @@ class GetMessageService
         }
 
         if(strlen($msgUser) > 10){
-            return $this->startMeme();
+            return $this->startMeme($ev);
         }
 
         return 'Ga jelas lu!';
@@ -78,7 +78,7 @@ class GetMessageService
         $userID = $this->userID($ev);
         $keyHeader = $userID.'meme_header';
         $keyFooter = $userID.'meme_footer';
-        $getHeader = Cache::get($keyHeader);
+        $getHeader = Cache::has($keyHeader) ? Cache::get($keyHeader) : false;
         if(!$getHeader){
             Cache::add($keyHeader, $this->getMsg($ev), 2 /*minutes*/);
             return 'Tulis kata untuk menaruh gambar di FOOTER';
