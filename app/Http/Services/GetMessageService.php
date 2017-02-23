@@ -100,7 +100,6 @@ class GetMessageService
         if(Cache::get($userID.'create_meme')){
             return $this->startMeme($ev);
         }
-
         $this->forgetCache($userID);
 
         if(strtolower($msgUser) == 'help' || $msgUser == ''){
@@ -120,8 +119,10 @@ class GetMessageService
         // forget
         $keyHeader = $userID.'meme_header';
         $keyFooter = $userID.'meme_footer';
+        $createMeme = $userID.'create_meme';
         Cache::forget($keyHeader);
         Cache::forget($keyFooter);
+        Cache::forget($createMeme);
     }
 
     private function help(){
