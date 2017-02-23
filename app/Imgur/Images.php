@@ -26,7 +26,7 @@ class Images
 
         curl_close ($ch);
 
-        if($server_output['success']){
+        if(!empty($server_output['success'])){
             return $server_output['data']['link'];
         }
         return false;

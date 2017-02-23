@@ -52,7 +52,6 @@ class GetMessageService
         }
 
         if($dev){
-            $msgResponse = $this->getMsg($ev);
             echo json_encode($msgResponse);
             exit;
         }
