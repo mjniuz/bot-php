@@ -36,7 +36,7 @@ class GetMessageService
         $base64Encode = base64_encode($base64);
 
         $toMemeURL = $this->image->upload($base64Encode);
-        return json_encode([$toMemeURL,base64_encode($base64)]);
+        return $toMemeURL;
     }
 
     public function replySend($formData)

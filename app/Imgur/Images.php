@@ -28,15 +28,15 @@ class Images
             ),
         ));
 
-        $response = curl_exec($curl);
+        $response = json_decode(curl_exec($curl));
         $err = curl_error($curl);
         curl_close($curl);
 
 
-        if(!empty($response['success'])){
-            return $response['data']['link'];
+        if($response->success){
+            return $response->data->link;
         }
-        return 'gagal upload imgur';
+        return $response;
     }
 
     public function meme($imgURL = '',$headerText = '',$footerText = ''){
