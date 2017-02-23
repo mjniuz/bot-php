@@ -32,12 +32,6 @@ class GetMessageService
     {
         $ev = $formData['events']['0'];
         $userID = $this->userID($ev);
-        if($dev){
-            $msgResponse = $this->getMsg($ev);
-            echo json_encode($msgResponse);
-            exit;
-        }
-
         $replyToken = $ev['replyToken'];
         $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
@@ -46,9 +40,21 @@ class GetMessageService
         if(Cache::get($userID.'meme_ready')){
             // image
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
+
+            if($dev){
+                echo json_encode($textMessageBuilder);
+                exit;
+            }
+
             $response = $this->bot->replyText($replyToken,  $textMessageBuilder);
             Cache::forget($userID.'meme_ready');
             return true;
+        }
+
+        if($dev){
+            $msgResponse = $this->getMsg($ev);
+            echo json_encode($msgResponse);
+            exit;
         }
 
 
