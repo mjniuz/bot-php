@@ -48,7 +48,7 @@ class GetMessageService
         if(Cache::get($userID.'meme_ready')){
             // image
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
-            $response = $this->bot->replyText($replyToken, $textMessageBuilder);
+            $response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
 
             if ($response->isSucceeded()) {
                 Cache::forget($userID . 'meme_ready');
