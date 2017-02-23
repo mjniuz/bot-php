@@ -26,7 +26,7 @@ class GetMessageService
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
 
         $msgResponse = $this->getMsg($ev);
-        $response = $this->bot->replyText($replyToken, $msgResponse);
+        $response = $this->bot->replyText($replyToken, $msgResponse[0] . $msgResponse[1]);
         
         if ($response->isSucceeded()) {
             logger("reply success!!");
@@ -39,7 +39,7 @@ class GetMessageService
         if($msgType == 'text'){
             $msgUser = $ev['message'];
 
-            return $this->collectMsg($msgUser);
+            return [$this->collectMsg($msgUser),$msgUser];
         }
 
         return '';
