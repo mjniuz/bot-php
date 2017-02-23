@@ -166,17 +166,20 @@ class GetMessageService
     }
 
     private function getMedia($ev = []){
-        /*$this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
+        $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
         $msgID = $ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
 
         if ($response->isSucceeded()) {
-            //$tempfile = tmpfile();
-            //fwrite($tempfile, $response->getRawBody());
+            $tempfile = tmpfile();
+            fwrite($tempfile, $response->getRawBody());
             return $response->getRawBody() || json_encode([$response,$msgID]);
-        }*/
-        $msgID = $ev['message']['id'];
+        } else {
+            error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
+        }
+
+        /*$msgID = $ev['message']['id'];
 
         $url = 'https://api.line.me/v2/bot/message/'.$msgID.'/content';
         $ch = curl_init();
@@ -190,7 +193,7 @@ class GetMessageService
         $server_output = curl_exec ($ch);
 
         curl_close ($ch);
-        return chunk_split(base64_encode($server_output));
+        return chunk_split(base64_encode($server_output));*/
 
     }
 }
