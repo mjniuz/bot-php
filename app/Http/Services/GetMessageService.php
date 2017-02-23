@@ -93,6 +93,11 @@ class GetMessageService
     private function collectMsg($msgUser = '',$ev){
         $userID = $this->userID($ev);
 
+
+        if(Cache::get($userID.'create_meme')){
+            return $this->startMeme($ev);
+        }
+
         if(strtolower($msgUser) == 'help' || $msgUser == ''){
             Cache::flush();
             return $this->help();
@@ -101,10 +106,6 @@ class GetMessageService
         if(strtolower($msgUser) == 'maen meme'){
             Cache::flush();
             return $this->meme($ev);
-        }
-
-        if(Cache::get($userID.'create_meme')){
-            return $this->startMeme($ev);
         }
         // default flush
         Cache::flush();
