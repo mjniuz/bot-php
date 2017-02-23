@@ -18,4 +18,4 @@ Route::get('/get-message', function (Request $request) {
     logger("message request : ", $request->all());
 });
 
-Route::post('/get-message/{id}', ['as' => 'line.bot.message', 'uses' => 'GetMessageController@getMessage']);
+Route::post('/get-message', ['as' => 'line.bot.message', 'uses' => 'GetMessageController@getMessage']);
