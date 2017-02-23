@@ -169,7 +169,7 @@ class GetMessageService
         $msgID = $ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
         if ($response->isSucceeded()) {
-            return $response->getRawBody();
+            return $msgID; //$response->getRawBody();
         }
 
         return $msgID;
