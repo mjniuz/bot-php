@@ -33,12 +33,11 @@ class BotRepository
         if($isMedia){
             // image
             $msgResponse = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
+            $response = $this->bot->replyMessage($replyToken, $msgResponse);
+            return $response->isSucceeded();
         }
-        $response = $this->bot->replyMessage($replyToken, $msgResponse);
 
-        if (!$response->isSucceeded()) {
-            $response = $this->bot->replyText($replyToken,  $msgResponse);
-        }
+        $response = $this->bot->replyText($replyToken,  $msgResponse);
         return $response->isSucceeded();
     }
     
