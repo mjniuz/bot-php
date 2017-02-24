@@ -28,6 +28,23 @@ class BotRepository
         $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
         $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
     }
+    
+    public function replyMsg($replyToken,$msgResponse, $isMedia = false){
+        if($isMedia){
+            // image
+            $msgResponse = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
+        }
+        $response = $this->bot->replyMessage($replyToken, $msgResponse);
+
+        if (!$response->isSucceeded()) {
+            $response = $this->bot->replyText($replyToken,  $msgResponse);
+        }
+        return $response->isSucceeded();
+    }
+    
+    public function getBot(){
+        return $this->bot;
+    }
 
     public function getMsg($ev = [],$onlyMsg = false){
         $msgUser = !empty($ev['message']['text']) ? $ev['message']['text'] : '';

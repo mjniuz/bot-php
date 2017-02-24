@@ -45,10 +45,8 @@ class GetMessageService
     public function replySend($formData)
     {
         $ev = $formData['events']['0'];
-        $userID = $this->bot_repo->userID($ev);
         $replyToken = $ev['replyToken'];
-        $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
-        $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
+        $userID = $this->bot_repo->userID($ev);
 
         $msgResponse = $this->bot_repo->getMsg($ev);
         if(Cache::get($userID.'meme_ready')){
@@ -56,19 +54,11 @@ class GetMessageService
             Cache::forget($userID.'create_ready');
 
             $this->bot_repo->forgetCache($userID);
-            // image
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder($msgResponse,$msgResponse);
-            $response = $this->bot->replyMessage($replyToken, $textMessageBuilder);
-
-            if (!$response->isSucceeded()) {
-                $response = $this->bot->replyText($replyToken,  $msgResponse);
-            }
-
-            return true;
+            return $this->bot_repo->replyMsg($replyToken,$msgResponse, true);
         }
 
         Cache::forget($userID.'meme_ready');
-        $response = $this->bot->replyText($replyToken,  $msgResponse);
+        $response = $this->bot_repo->replyMsg($replyToken,$msgResponse);
         
         if ($response->isSucceeded()) {
             logger("reply success!!");
