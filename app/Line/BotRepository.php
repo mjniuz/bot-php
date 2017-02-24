@@ -28,26 +28,16 @@ class BotRepository
     }
 
     public function getMsg($ev = [],$onlyMsg = false){
-        $msgType = !empty($ev['message']) ? $ev['message']['type'] : false;
-        if($msgType == 'text'){
-            $msgUser = $ev['message']['text'];
-            if($onlyMsg){
-                return $msgUser;
-            }
-
-            return $this->collectMsg($msgUser,$ev);
+        $msgUser = !empty($ev['message']['text']) ? $ev['message']['text'] : '';
+        if($onlyMsg){
+            return $msgUser;
         }
 
-        if($msgType == 'image'){
-            return $this->collectMsg('',$ev);
-        }
-
-        return $this->help();
+        return $this->collectMsg($msgUser,$ev);
     }
 
     private function collectMsg($msgUser = '',$ev){
         $userID = $this->userID($ev);
-
 
         if(Cache::get($userID.'create_meme')){
             return $this->startMeme($ev);
