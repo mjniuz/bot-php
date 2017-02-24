@@ -14,17 +14,19 @@ class BotRepository
     /**
      * @var LINEBot
      */
-    private $bot;
+    protected $bot;
     /**
      * @var HTTPClient
      */
-    private $client;
+    protected $client;
 
     protected $image;
 
     public function __construct(Images $image)
     {
         $this->image = $image;
+        $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
+        $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
     }
 
     public function getMsg($ev = [],$onlyMsg = false){
@@ -126,8 +128,6 @@ class BotRepository
     }
 
     private function getMedia($ev = []){
-        $this->client = new CurlHTTPClient(env('LINE_BOT_ACCESS_TOKEN'));
-        $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_BOT_SECRET')]);
         $msgID = (int)$ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
 
