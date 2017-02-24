@@ -40,6 +40,8 @@ class Images
     }
 
     public function meme($imgURL = '',$headerText = '',$footerText = ''){
+        $headerText = str_replace(' ','-',$headerText);
+        $footerText = str_replace(' ','-',$footerText);
         $url = 'https://memegen.link/custom/'.$headerText.'/'.$footerText.'.jpg?alt='.$imgURL;
         return $url;
     }
