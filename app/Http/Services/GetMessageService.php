@@ -60,11 +60,6 @@ class GetMessageService
         Cache::forget($userID.'meme_ready');
         $response = $this->bot_repo->replyMsg($replyToken,$msgResponse);
         
-        if ($response->isSucceeded()) {
-            logger("reply success!!");
-            return true;
-        }
-
         return $response;
     }
 }
