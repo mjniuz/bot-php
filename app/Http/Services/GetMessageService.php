@@ -50,14 +50,11 @@ class GetMessageService
 
         $msgResponse = $this->bot_repo->getMsg($ev);
         if(Cache::get($userID.'meme_ready')){
-            Cache::forget($userID.'meme_ready');
-            Cache::forget($userID.'create_ready');
-
             $this->bot_repo->forgetCache($userID);
             return $this->bot_repo->replyMsg($replyToken,$msgResponse, true);
         }
 
-        Cache::forget($userID.'meme_ready');
+        $this->bot_repo->forgetCache($userID,['meme_ready']);
         $response = $this->bot_repo->replyMsg($replyToken,$msgResponse);
         
         return $response;

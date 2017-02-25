@@ -74,15 +74,24 @@ class BotRepository
         ketik *help* buat bantuan!';
     }
 
-    public function forgetCache($userID = ''){
-
+    public function forgetCache($userID = '',$keys = []){
         // forget
-        $keyHeader = $userID.'meme_header';
-        $keyFooter = $userID.'meme_footer';
-        $createMeme = $userID.'create_meme';
-        Cache::forget($keyHeader);
-        Cache::forget($keyFooter);
-        Cache::forget($createMeme);
+        $defaultKey = [
+            'meme_header',
+            'meme_footer',
+            'create_meme',
+            'meme_ready',
+            'create_ready'
+        ];
+        if(empty($keys)){
+            $keys = $defaultKey;
+        }
+
+        foreach($keys as $key){
+            Cache::forget($userID.$key);
+        }
+        
+        return true;
     }
 
     private function help(){
