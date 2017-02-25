@@ -7,7 +7,7 @@ Add line account by scanning this QR code.
 
 ![alt tag](https://qr-official.line.me/M/y27fTom5rx.png)
 
-![alt tag](http://i.imgur.com/BSs3iG3.gif)
+![alt tag](https://i.imgur.com/BSs3iG3.gif)
 
 ## Use
 [Laravel framework](https://github.com/laravel/laravel)
