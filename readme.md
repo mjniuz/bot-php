@@ -6,7 +6,9 @@ This is very easy to call line Messaging API sample code
 Add line account by scanning this QR code.
 ![alt tag](https://qr-official.line.me/M/y27fTom5rx.png)
 
-## Use 
+![alt tag](http://i.imgur.com/BSs3iG3.gif)
+
+## Use
 [Laravel framework](https://github.com/laravel/laravel)
 
 Edit .env file with [LINE Developer](https://developers.line.me/messaging-api/getting-started#set_up_bot)
