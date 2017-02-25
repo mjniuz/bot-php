@@ -12,6 +12,7 @@
 */
 
 use Illuminate\Http\Request;
+use Telegram;
 
 Route::get('/get-message', function (Request $request) {
     
@@ -21,3 +22,10 @@ Route::get('/get-message', function (Request $request) {
 Route::post('/get-message', ['as' => 'line.bot.message', 'uses' => 'GetMessageController@getMessage']);
 
 Route::post('/test', ['as' => 'line.bot.message', 'uses' => 'GetMessageController@test']);
+
+
+Route::post('/<token>/webhook', function () {
+    $updates = Telegram::getWebhookUpdates();
+
+    return 'ok';
+});
