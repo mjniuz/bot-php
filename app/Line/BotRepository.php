@@ -144,6 +144,10 @@ class BotRepository
         if($getHeader && $getFooter){
             // upload image
             $image = $this->getMedia($ev);
+            if(!$image){
+                return false;
+            }
+
             $imgURL = $this->image->upload($image);
             $toMemeURL = $this->image->meme($imgURL,$getHeader,$getFooter);
 
@@ -197,10 +201,9 @@ class BotRepository
 
         if ($response->isSucceeded()) {
             return base64_encode($response->getRawBody()); //$response->getRawBody() || json_encode([$response,$msgID]);
-        } else {
-            error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
         }
 
         return false;
     }
+
 }
