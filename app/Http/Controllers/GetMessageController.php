@@ -35,9 +35,9 @@ class GetMessageController
         //$this->messageService->voiceReply($request->json()->all());
     }
     
-    /*public function test(GetMessageRequest $request){
+    public function test(GetMessageRequest $request){
         //Storage::put('avatars.flac', $audios['source'],'public');
         $voice = $this->speech->convert();
         dd($voice);
-    }*/
+    }
 }
