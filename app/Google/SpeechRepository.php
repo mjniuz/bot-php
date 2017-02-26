@@ -61,7 +61,7 @@ class SpeechRepository
             $source = $this->platformSlashes($source);
         }
 
-        $audios = 'wew';//$this->checkAudio($source);
+        $audios = $this->checkAudio($source);
         return $audios;
         if(!$audios){
             return false;
