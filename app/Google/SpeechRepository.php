@@ -31,6 +31,10 @@ class SpeechRepository
     private function checkAudio($source = ''){
         // Analyze file and store returned data in $ThisFileInfo
         $audio = $this->getid3->analyze($source);
+        if(!isset($audio['audio'])){
+            return false;
+        }
+
         $fileFormat = $audio['audio']['dataformat'];
         if($fileFormat != 'flac'){
             // convert to flac first
@@ -57,6 +61,9 @@ class SpeechRepository
         }
 
         $audios = $this->checkAudio($source);
+        if(!$audios){
+            return false;
+        }
 
         // Recognize the speech in an audio file.
         $results = $this->speech->recognize(

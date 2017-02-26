@@ -71,7 +71,8 @@ class GetMessageService
         $voiceMsg = $this->bot_repo->getVoiceMessage($ev);
 
         $voiceText = $this->speech->convert(storage_path('public').'/'.$voiceMsg);
+        $transcript = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
 
-        return $this->bot_repo->voiceProcess($replyToken,$voiceText['transcript']);
+        return $this->bot_repo->voiceProcess($replyToken,$transcript);
     }
 }
