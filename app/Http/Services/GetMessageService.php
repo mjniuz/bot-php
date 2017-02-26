@@ -70,7 +70,7 @@ class GetMessageService
         return $response;
     }
     
-    public function voiceReply($formData = []){
+    /*public function voiceReply($formData = []){
         $ev = $formData['events']['0'];
         $replyToken = $ev['replyToken'];
         $userID = $this->bot_repo->userID($ev);
@@ -81,5 +81,5 @@ class GetMessageService
         $transcript = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
 
         return $this->bot_repo->voiceProcess($replyToken,$transcript);
-    }
+    }*/
 }

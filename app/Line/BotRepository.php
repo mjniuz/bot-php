@@ -68,16 +68,17 @@ class BotRepository
         }
         $this->forgetCache($userID);
 
+        // VOICE
+        if(strtolower(($msgUser) == 'voice') || Cache::get($userID.'voice')){
+            $this->getVoiceMessage($ev, $userID);
+        }
+
         if(strtolower($msgUser) == 'help' || ($msgUser == '' && Cache::get($userID.'voice_ready'))){
             return $this->help();
         }
 
         if(strtolower($msgUser) == 'maen meme'){
             return $this->meme($ev);
-        }
-
-        if(strtolower(($msgUser) == 'voice')){
-            $this->getVoiceMessage($ev, $userID);
         }
 
         return 'Ga jelas lu!!!
