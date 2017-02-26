@@ -61,8 +61,8 @@ class GetMessageService
         if(Cache::get($userID.'voice_ready')){
             $voiceText = $this->speech->convert(storage_path('public').'/'.$msgResponse);
             $msgResponse = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
-            Cache::get($userID.'voice');
-            Cache::get($userID.'voice_ready');
+            Cache::forget($userID.'voice');
+            Cache::forget($userID.'voice_ready');
         }
         
         $response = $this->bot_repo->replyMsg($replyToken,$msgResponse);
