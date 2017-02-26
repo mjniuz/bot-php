@@ -31,7 +31,7 @@ class SpeechRepository
     private function checkAudio($source = ''){
         // Analyze file and store returned data in $ThisFileInfo
         $audio = $this->getid3->analyze($source);
-        return $audio;
+        //return $audio;
         if(!isset($audio['audio'])){
             return false;
         }
@@ -61,23 +61,23 @@ class SpeechRepository
             $source = $this->platformSlashes($source);
         }
 
-        //$audios = $this->checkAudio($source);
+        $audios = $this->checkAudio($source);
         //return $audios;
-        //if(!$audios){
-        //    return false;
-        //}
+        if(!$audios){
+            return false;
+        }
 
         // Recognize the speech in an audio file.
         $results = $this->speech->recognize(
-            fopen($source, 'r'),
+            fopen($audios['source'], 'r'),
             [
-                'sampleRate'    => 48000,//$audios['sample_rate'],
+                'sampleRate'    => $audios['sample_rate'],
                 'languageCode'  => 'id-ID'
             ]
         );
 
         // delete storage
-        File::delete($source);
+        File::delete($audios['source']);
 
         return $results;
     }
