@@ -179,7 +179,7 @@ class BotRepository
         $msgID = (int)$ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
         if ($response->isSucceeded()) {
-            $name = md5(date("Y-m-d H:i:s")).'voice_note.acc';
+            $name = md5(date("Y-m-d H:i:s")).'voice_note.aac';
             Storage::put($name,$response->getRawBody(),'public');
 
             $cacheKey = $userID.'voice_ready';
