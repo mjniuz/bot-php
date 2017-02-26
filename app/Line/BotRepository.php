@@ -8,6 +8,7 @@ use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use Carbon\Carbon;
 use App\Imgur\Images;
 use LINE\LINEBot\MessageBuilder;
+use Storage;
 
 class BotRepository
 {
@@ -37,6 +38,11 @@ class BotRepository
             return $response->isSucceeded();
         }
 
+        $response = $this->bot->replyText($replyToken,  $msgResponse);
+        return $response->isSucceeded();
+    }
+
+    public function voiceProcess($replyToken,$msgResponse){
         $response = $this->bot->replyText($replyToken,  $msgResponse);
         return $response->isSucceeded();
     }
@@ -152,6 +158,18 @@ class BotRepository
         return false;
     }
 
+    public function getVoiceMessage($ev = []){
+        $msgID = (int)$ev['message']['id'];
+        $response = $this->bot->getMessageContent($msgID);
+        if ($response->isSucceeded()) {
+            $name = md5(date("Y-m-d H:i:s"));
+            Storage::put($name,$response->getRawBody(),'public');
+            return $name;
+        }
+        
+        return ($response->getHTTPStatus() . ' ' . $response->getRawBody());
+    }
+
     private function getMedia($ev = []){
         $msgID = (int)$ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
@@ -163,6 +181,5 @@ class BotRepository
         }
 
         return false;
-
     }
 }

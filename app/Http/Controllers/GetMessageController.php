@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GetMessageRequest;
 use App\Http\Services\GetMessageService;
 use Symfony\Component\HttpFoundation\Request;
+use App\Google\SpeechRepository;
 
 class GetMessageController
 {
@@ -12,14 +13,16 @@ class GetMessageController
      * @var GetMessageService
      */
     private $messageService;
+    protected $speech;
     
     /**
      * GetMessageController constructor.
      * @param GetMessageService $messageService
      */
-    public function __construct(GetMessageService $messageService)
+    public function __construct(GetMessageService $messageService,SpeechRepository $speech)
     {
         $this->messageService = $messageService;
+        $this->speech = $speech;
     }
     
     public function getMessage(GetMessageRequest $request)
@@ -28,7 +31,13 @@ class GetMessageController
         $this->messageService->replySend($request->json()->all());
     }
     
+    public function responseMessage(GetMessageRequest $request){
+        $this->messageService->voiceReply($request->json()->all());
+    }
+    
     public function test(GetMessageRequest $request){
-        return response()->json($this->messageService->testMeme());
+        //Storage::put('avatars.flac', $audios['source'],'public');
+        $voice = $this->speech->convert();
+        dd($voice);
     }
 }

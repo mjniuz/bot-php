@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use App\Imgur\Images;
 use LINE\LINEBot\MessageBuilder;
 use App\Line\BotRepository;
+use App\Google\SpeechRepository;
 
 class GetMessageService
 {
@@ -23,11 +24,13 @@ class GetMessageService
 
     protected $image;
     protected $bot_repo;
+    protected $speech;
 
-    public function __construct(Images $image, BotRepository $bot_repo)
+    public function __construct(Images $image, BotRepository $bot_repo,SpeechRepository $speech)
     {
         $this->image = $image;
         $this->bot_repo = $bot_repo;
+        $this->speech = $speech;
     }
 
     public function testMeme(){
@@ -58,5 +61,17 @@ class GetMessageService
         $response = $this->bot_repo->replyMsg($replyToken,$msgResponse);
         
         return $response;
+    }
+    
+    public function voiceReply($formData = []){
+        $ev = $formData['events']['0'];
+        $replyToken = $ev['replyToken'];
+        $userID = $this->bot_repo->userID($ev);
+
+        $voiceMsg = $this->bot_repo->getVoiceMessage($ev);
+
+        $voiceText = $this->speech->convert(storage_path('public').'/'.$voiceMsg);
+
+        return $this->bot_repo->voiceProcess($replyToken,$voiceText['transcript']);
     }
 }
