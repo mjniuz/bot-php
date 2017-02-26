@@ -7,7 +7,11 @@ Add line account by scanning this QR code.
 
 ![alt tag](https://qr-official.line.me/M/y27fTom5rx.png)
 
+### Meme maker
 ![alt tag](https://i.imgur.com/BSs3iG3.gif)
+
+### Voice to text
+![alt tag](https://raw.githubusercontent.com/mjniuz/bot-php/master/voice_demo.gif)
 
 ## Use
 [Laravel framework](https://github.com/laravel/laravel)
