@@ -69,7 +69,7 @@ class SpeechRepository
 
         // Recognize the speech in an audio file.
         $results = $this->speech->recognize(
-            fopen($audios['source'], 'r'),
+            fopen($source, 'r'),
             [
                 'sampleRate'    => 48000,//$audios['sample_rate'],
                 'languageCode'  => 'id-ID'
