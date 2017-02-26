@@ -19,11 +19,7 @@ class Converter
         $name = md5(date("Y-m-d H:i:s")).'.flac';
         $newSource = $targetDir.'/'.$name;
 
-        // tricky windows
-        $ffmpeg = 'ffmpeg';
-        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
-            $ffmpeg = env('WINDOWS_FFMPEG_DIR');
-        }
+        $ffmpeg = env('FFMPEG_DIR');
         $command = $ffmpeg." -i ".$source." -c:a flac ".$newSource;
 
 
