@@ -76,6 +76,10 @@ class BotRepository
             return $this->meme($ev);
         }
 
+        if(strtolower(($msgUser) == 'voice')){
+            $this->getVoiceMessage($ev, $userID);
+        }
+
         return 'Ga jelas lu!!!
         ketik *help* buat bantuan!';
     }
@@ -158,15 +162,31 @@ class BotRepository
         return false;
     }
 
-    public function getVoiceMessage($ev = []){
+    public function getVoiceMessage($ev = [], $userID){
+        $cacheKey = $userID.'voice';
+        $expiresAt = Carbon::now()->addMinutes(2);
+        $isStartVoice = Cache::get($cacheKey);
+
+        if($isStartVoice !== true){
+            Cache::add($cacheKey, true, $expiresAt);
+            return "Okay, sekarang kirim voice note kamu";
+        }
+
+        // create new
+        Cache::put($cacheKey, false, $expiresAt);
+
         $msgID = (int)$ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
         if ($response->isSucceeded()) {
             $name = md5(date("Y-m-d H:i:s"));
             Storage::put($name,$response->getRawBody(),'public');
+
+            $cacheKey = $userID.'voice_ready';
+            Cache::put($cacheKey, true, $expiresAt);
+
             return $name;
         }
-        
+
         return ($response->getHTTPStatus() . ' ' . $response->getRawBody());
     }
 

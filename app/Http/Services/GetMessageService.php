@@ -56,8 +56,15 @@ class GetMessageService
             $this->bot_repo->forgetCache($userID);
             return $this->bot_repo->replyMsg($replyToken,$msgResponse, true);
         }
-
         $this->bot_repo->forgetCache($userID,['meme_ready']);
+        
+        if(Cache::get($userID.'voice_ready')){
+            $voiceText = $this->speech->convert(storage_path('public').'/'.$msgResponse);
+            $msgResponse = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
+            Cache::get($userID.'voice');
+            Cache::get($userID.'voice_ready');
+        }
+        
         $response = $this->bot_repo->replyMsg($replyToken,$msgResponse);
         
         return $response;
