@@ -106,9 +106,11 @@ class BotRepository
     }
 
     private function help(){
-        $msg = 'Buatanye Alan.
-        Buat lo yang pengen bikin meme, silahkan ketik: 
-        maen Meme';
+        $msg = 'Buat lo yang pengen bikin meme, silahkan ketik: 
+*maen Meme*
+		
+Kalo mau nyoba konversi voice note/suara kamu ke teks,(max 20 detik, karena masih nyoba2 sob!) bisa ketik:
+*voice*';
 
         return $msg;
     }

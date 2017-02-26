@@ -38,6 +38,10 @@ class GetMessageController
     public function test(GetMessageRequest $request){
         //Storage::put('avatars.flac', $audios['source'],'public');
         $voice = $this->speech->convert();
-        dd($voice);
+		foreach($voice as $v){
+			echo $v['transcript'];
+		}
+		echo '<hr>';
+        echo json_encode($voice); exit;
     }
 }

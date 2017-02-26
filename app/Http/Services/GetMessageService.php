@@ -58,24 +58,27 @@ class GetMessageService
         }
         $this->bot_repo->forgetCache($userID,['meme_ready']);
         
-        if(Cache::get($userID.'voice_ready')){
-            //$msgResponse = $this->bot_repo->getMsg($ev);
+        if(Cache::get($userID.'voice_ready')){			
             $dir = storage_path().'/app/'.$msgResponse;
-            //$response = $this->bot_repo->replyMsg($replyToken,' test '. $dir);
-            //$response = $this->bot_repo->replyMsg($replyToken,'wait');
-
-            $voiceText = $this->speech->convert($dir);
-            $response = $this->bot_repo->replyMsg($replyToken,json_encode($voiceText));
-            $msgResponse = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
-            Cache::forget($userID.'voice');
+            $voiceTexts = $this->speech->convert($dir);
+			$transcript = '';
+			if(!empty($voiceTexts)){
+				foreach($voiceTexts as $voiceText){
+					$transcript .= $voiceText['transcript'];
+				}
+			}
+		
+            $result = ($transcript != '') ? $transcript : "Lagi ada masalah nih. Coba diulang pake command *voice*";
+			
+			Cache::forget($userID.'voice');
             Cache::forget($userID.'voice_ready');
 
-            $response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test 2'. json_encode($voiceText));
+            $response = $this->bot_repo->replyMsg($replyToken,$result);
             return $response;
         }
         
+		// default
         $response = $this->bot_repo->replyMsg($replyToken,$msgResponse);
-        
         return $response;
     }
     

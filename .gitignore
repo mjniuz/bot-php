@@ -3,4 +3,5 @@
 .idea
 vendor
 bootstrap/cache
+bootstrap
 storage

@@ -63,7 +63,7 @@ class SpeechRepository
 
         $audios = $this->checkAudio($source);
         //return $audios;
-        if(!$audios){
+        if(empty($audios)){
             return false;
         }
 
@@ -75,9 +75,9 @@ class SpeechRepository
                 'languageCode'  => 'id-ID'
             ]
         );
-
-        // delete storage
-        File::delete($audios['source']);
+        // delete storage, LARAVEL ISSUE
+        @unlink($audios['source']);
+        @unlink($source);
 
         return $results;
     }
