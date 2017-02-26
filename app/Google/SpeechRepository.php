@@ -61,17 +61,17 @@ class SpeechRepository
             $source = $this->platformSlashes($source);
         }
 
-        $audios = $this->checkAudio($source);
-        return $audios;
-        if(!$audios){
-            return false;
-        }
+        //$audios = $this->checkAudio($source);
+        //return $audios;
+        //if(!$audios){
+        //    return false;
+        //}
 
         // Recognize the speech in an audio file.
         $results = $this->speech->recognize(
             fopen($audios['source'], 'r'),
             [
-                'sampleRate'    => $audios['sample_rate'],
+                'sampleRate'    => 48000,//$audios['sample_rate'],
                 'languageCode'  => 'id-ID'
             ]
         );
