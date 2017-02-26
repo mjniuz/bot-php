@@ -65,7 +65,7 @@ class GetMessageService
             Cache::forget($userID.'voice');
             Cache::forget($userID.'voice_ready');
 
-            $response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test '. $voiceText . ' '. json_encode($ev));
+            $response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test '. $voiceText);
             return $response;
         }
         
