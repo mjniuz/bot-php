@@ -31,7 +31,7 @@ class SpeechRepository
     private function checkAudio($source = ''){
         // Analyze file and store returned data in $ThisFileInfo
         $audio = $this->getid3->analyze($source);
-        //return $audio;
+        return $audio;
         if(!isset($audio['audio'])){
             return false;
         }
@@ -62,7 +62,7 @@ class SpeechRepository
         }
 
         $audios = $this->checkAudio($source);
-        //return $audios;
+        return $audios;
         if(!$audios){
             return false;
         }

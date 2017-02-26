@@ -61,7 +61,7 @@ class GetMessageService
         if(Cache::get($userID.'voice_ready')){
             //$msgResponse = $this->bot_repo->getMsg($ev);
             $dir = storage_path().'/app/'.$msgResponse;
-            //$response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test '. $dir);
+            $response = $this->bot_repo->replyMsg($replyToken,' test '. $dir);
             //$response = $this->bot_repo->replyMsg($replyToken,'wait');
 
             $voiceText = $this->speech->convert($dir);
