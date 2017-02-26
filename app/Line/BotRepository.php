@@ -68,7 +68,7 @@ class BotRepository
         }
         $this->forgetCache($userID);
 
-        if(strtolower($msgUser) == 'help' || $msgUser == ''){
+        if(strtolower($msgUser) == 'help' || ($msgUser == '' && Cache::get($userID.'voice_ready'))){
             return $this->help();
         }
 
