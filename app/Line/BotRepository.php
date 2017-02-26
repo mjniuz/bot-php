@@ -38,7 +38,7 @@ class BotRepository
             return $response->isSucceeded();
         }
 
-        $response = $this->bot->replyText($replyToken,  $msgResponse);
+        $response = $this->bot->replyText($replyToken,  $msgResponse );
         return $response->isSucceeded();
     }
 
@@ -179,7 +179,7 @@ class BotRepository
         $msgID = (int)$ev['message']['id'];
         $response = $this->bot->getMessageContent($msgID);
         if ($response->isSucceeded()) {
-            $name = md5(date("Y-m-d H:i:s"));
+            $name = md5(date("Y-m-d H:i:s")).'voice_note.acc';
             Storage::put($name,$response->getRawBody(),'public');
 
             $cacheKey = $userID.'voice_ready';
