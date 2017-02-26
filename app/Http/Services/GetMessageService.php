@@ -62,13 +62,14 @@ class GetMessageService
             //$msgResponse = $this->bot_repo->getMsg($ev);
             $dir = storage_path().'/app/'.$msgResponse;
             $response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test '. $dir);
+            $response = $this->bot_repo->replyMsg($replyToken,'wait');
 
             $voiceText = $this->speech->convert($dir);
             //$msgResponse = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
             Cache::forget($userID.'voice');
             Cache::forget($userID.'voice_ready');
 
-            $response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test '. json_encode($voiceText));
+            $response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test 2'. json_encode($voiceText));
             return $response;
         }
         
