@@ -77,7 +77,7 @@ class SpeechRepository
         );
 
         // delete storage
-        File::delete($audios['source']);
+        File::delete($source);
 
         return $results;
     }
