@@ -70,7 +70,7 @@ class BotRepository
 
         // VOICE
         if(strtolower($msgUser) == 'voice' || Cache::get($userID.'voice')){
-            $this->getVoiceMessage($ev, $userID);
+            return $this->getVoiceMessage($ev, $userID);
         }
 
         if(strtolower($msgUser) == 'help' || ($msgUser == '' && Cache::get($userID.'voice_ready'))){
