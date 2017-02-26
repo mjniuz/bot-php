@@ -65,7 +65,7 @@ class GetMessageService
             //$response = $this->bot_repo->replyMsg($replyToken,'wait');
 
             $voiceText = $this->speech->convert($dir);
-            //$msgResponse = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
+            $msgResponse = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
             Cache::forget($userID.'voice');
             Cache::forget($userID.'voice_ready');
 

@@ -39,7 +39,7 @@ class SpeechRepository
         $fileFormat = $audio['audio']['dataformat'];
         if($fileFormat != 'flac'){
             // convert to flac first
-            $source = $this->converter->convertToFlac($source);
+            $source = $this->converter->convertToFlac($source, storage_path() .'/app');
             $audio = $this->getid3->analyze($source);
         }
 
