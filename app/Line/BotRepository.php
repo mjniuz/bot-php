@@ -69,7 +69,7 @@ class BotRepository
         $this->forgetCache($userID);
 
         // VOICE
-        if(strtolower(($msgUser)) == 'voice' || Cache::get($userID.'voice')){
+        if(strtolower($msgUser) == 'voice' || Cache::get($userID.'voice')){
             $this->getVoiceMessage($ev, $userID);
         }
 
