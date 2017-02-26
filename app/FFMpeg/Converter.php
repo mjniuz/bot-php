@@ -20,7 +20,7 @@ class Converter
         $newSource = $targetDir.'/'.$name;
 
         $ffmpeg = env('FFMPEG_DIR');
-        $command = "sudo ".$ffmpeg." -i ".$source." -c:a flac ".$newSource;
+        $command = $ffmpeg." -i ".$source." -c:a flac ".$newSource;
 
 
         $process = new Process($command);
