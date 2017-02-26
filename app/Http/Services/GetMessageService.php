@@ -60,12 +60,13 @@ class GetMessageService
         
         if(Cache::get($userID.'voice_ready')){
             //$msgResponse = $this->bot_repo->getMsg($ev);
-            $voiceText = $this->speech->convert(storage_path('public').'/'.$msgResponse);
+            $dir = storage_path('public').'/'.$msgResponse;
+            $voiceText = $this->speech->convert($dir);
             //$msgResponse = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
             Cache::forget($userID.'voice');
             Cache::forget($userID.'voice_ready');
 
-            $response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test '. $voiceText);
+            $response = $this->bot_repo->replyMsg($replyToken,$msgResponse .' test '. $dir .' '. json_encode($voiceText));
             return $response;
         }
         
