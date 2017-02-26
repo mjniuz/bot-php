@@ -60,7 +60,7 @@ class GetMessageService
         
         if(Cache::get($userID.'voice_ready')){
             //$msgResponse = $this->bot_repo->getMsg($ev);
-            $dir = storage_path('public').'/'.$msgResponse;
+            $dir = storage_path().'/app/'.$msgResponse;
             $voiceText = $this->speech->convert($dir);
             //$msgResponse = isset($voiceText['transcript']) ? $voiceText['transcript'] : false;
             Cache::forget($userID.'voice');
