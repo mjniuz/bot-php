@@ -32,7 +32,7 @@ class GetMessageController
     }
     
     public function responseMessage(GetMessageRequest $request){
-        $this->messageService->voiceReply($request->json()->all());
+        //$this->messageService->voiceReply($request->json()->all());
     }
     
     public function test(GetMessageRequest $request){
