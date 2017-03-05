@@ -5,7 +5,7 @@ This is very easy to call line Messaging API sample code
 ## Example Bot
 Add line account by scanning this QR code.
 
-![Add as Friend](http://qr-official.line.me/L/yviiBkjn11.png)
+![Add as Friend](https://i.imgur.com/HAArmNT.png)
 [![Add as Friend](https://scdn.line-apps.com/n/line_add_friends/btn/en.png)](https://line.me/R/ti/p/%40cdg3048q)
 
 ### Meme maker
