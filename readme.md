@@ -5,7 +5,9 @@ This is very easy to call line Messaging API sample code
 ## Example Bot
 Add line account by scanning this QR code.
 
-![alt tag](https://raw.githubusercontent.com/mjniuz/bot-php/master/qr.png)
+![alt tag](http://qr-official.line.me/M/yviiBkjn11.png)
+
+[Add line as fried](https://line.me/R/ti/p/%40cdg3048q)
 
 ### Meme maker
 ![alt tag](https://raw.githubusercontent.com/mjniuz/bot-php/master/meme_maker.gif)
